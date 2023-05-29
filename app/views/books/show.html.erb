@@ -22,20 +22,16 @@
 <div class="col-md-8 offset-md-1">
   <h2>Book detail</h2>
   <table class="table">
-　　<tbody>
-　　  <tr>
-    <td><% if @book.image.attached? %>
-      <th><%= image_tag @books.image, size: "100x100" %><br>
-      <%=link_to @book.user.name, books_path %></th>
-    <% else %>
-      <th><%= image_tag 'nimage', size: "100x100" %><br>
-      <%=link_to @book.user.name, books_path %></th>
-    <% end %>
+　　<tbody><tr>
+    <td>
+    <th><%= image_tag @book.user.get_profile_image(100,100) %><br>
+      <%=link_to @book.user.name, books_path(@user) %></th>
     </td>
     <td><%=link_to @book.title, book_path %></td>
     <td><%= @book.body%></td>
-    <td><%= link_to "Edit", "/books/#{@book.id}/edit" %></td>
-    <td><%= link_to "Destroy", "/books/#{@book.id}", method: :delete, "data-confirm" => "Are you sure？" %></td>
+    <td><%= link_to "Edit", "/books/#{@book.id}/edit", class:"btn btn-success"%></td>
+    <td><%= link_to "Destroy", "/books/#{@book.id}", method: :delete, class:"btn btn-danger", "data-confirm" => "本当に消しますか？"%>
+    </td>
 　　　</tr></tbody>
 　　</table>
 　</div>
