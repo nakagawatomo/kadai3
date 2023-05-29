@@ -11,11 +11,16 @@
   </ul>
   <% end %>
 
+
 <div class="container px-5 px-sm-0">
+
+
+
   <div class="row">
    <div class="col-md-3">
-  <%= render 'users/info', user: @user %>
-  <%= render 'list', book: @book %>
+
+  <%= render 'users/info', user: @book.user %>
+  <%= render 'list', book: @Book %>
   </div>
 
 
@@ -23,14 +28,21 @@
   <h2>Book detail</h2>
   <table class="table">
 　　<tbody><tr>
+
     <td>
-    <th><%= image_tag @book.user.get_profile_image(100,100) %><br>
-      <%=link_to @book.user.name, books_path(@user) %></th>
+    <%= link_to user_path(@book.user.id) do %>
+        <%= image_tag @book.user.get_profile_image(100,100) %><br>
+    <% end %>
+
+    <%=link_to @book.user.name, user_path(@book.user.id) %></th>
     </td>
+
     <td><%=link_to @book.title, book_path %></td>
     <td><%= @book.body%></td>
+    <% if @book.user == current_user %>
     <td><%= link_to "Edit", "/books/#{@book.id}/edit", class:"btn btn-success"%></td>
     <td><%= link_to "Destroy", "/books/#{@book.id}", method: :delete, class:"btn btn-danger", "data-confirm" => "本当に消しますか？"%>
+    <% end %>
     </td>
 　　　</tr></tbody>
 　　</table>
