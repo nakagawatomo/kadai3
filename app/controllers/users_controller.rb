@@ -10,13 +10,14 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = PostImage.new(user_params)
-    @user.id = current_user.id
-    if @user.save
-      redirect_to user_path(@user)
+    @book = Book.new(book_params)
+    @book.user_id = current_user.id
+    if @book.save
+    flash[:notice] = "You have created book successfully."
+    redirect_to book_path(@book.id)
     else
-      @users = User.all
-      render :show
+      @books = Book.all
+     redirect_to books_path
     end
   end
 
